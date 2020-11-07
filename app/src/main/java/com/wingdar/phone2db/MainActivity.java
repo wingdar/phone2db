@@ -3,10 +3,12 @@ package com.wingdar.phone2db;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
         ok_button.setOnClickListener(ok_btn);
 
         final TextView text_view = (TextView) findViewById(R.id.Text_view);
+        //final ListView ListV = (ListView) findViewById(R.id.LV1)
+        text_view.setMovementMethod(ScrollingMovementMethod.getInstance());
 
         new Thread(new Runnable(){
             @Override
@@ -32,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
                 text_view.post(new Runnable() {
                     public void run() {
                         text_view.setText(data);
+                        //ListV.setTextFilterEnabled(data);
                     }
                 });
 
