@@ -42,7 +42,7 @@ public class MysqlCon {
         String data = "";
         try {
             Connection con = DriverManager.getConnection(url, db_user, db_password);
-            String sql = "SELECT * FROM TempX";
+            String sql = "SELECT * FROM TempX ORDER BY datetime DESC";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
 
@@ -51,7 +51,8 @@ public class MysqlCon {
                 String id = rs.getString("userid");
                 String temp = rs.getString("tempx");
                 String date = rs.getString("datetime");
-                data += id + ", " + temp + ", 時間："+ date +"\n";
+                data += String.format("%8s, %6s, 時間：%22s %n", id, temp, date);    //Log 格式化輸出很漂亮，但 TextView 不行
+                //data += id + ", " + temp + ", 時間："+ date +"\n";
             }
             st.close();
         } catch (SQLException e) {
